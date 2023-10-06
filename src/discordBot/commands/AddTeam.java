@@ -2,8 +2,8 @@ package discordBot.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
-public class AddTeam extends Command{
-
+public class AddTeam /*extends Command*/{
+/*
     public AddTeam(){
         super.name = "addteam";
         super.desc = "add a team";
@@ -13,4 +13,6 @@ public class AddTeam extends Command{
     public void run(SlashCommandInteractionEvent event) {
 
     }
+
+ */
 }
