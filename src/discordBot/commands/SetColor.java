@@ -43,7 +43,7 @@ public class SetColor extends Command{
     public void run(SlashCommandInteractionEvent event) {
         String color = event.getOption("color", "#ffffff", OptionMapping::getAsString);
         Optional<Role> role = event.getMember().getRoles().stream().filter(r -> teams.contains(r.getName())).findFirst();
-        Optional<Role> captainrole = event.getMember().getRoles().stream().filter(r -> r.getName().equals("captain")).findFirst();
+        Optional<Role> captainrole = event.getMember().getRoles().stream().filter(r -> r.getName().equals("Team Captain")).findFirst();
 
         try {
             if(captainrole.isPresent()) {
