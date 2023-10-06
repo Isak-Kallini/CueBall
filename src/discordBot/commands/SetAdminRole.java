@@ -4,8 +4,8 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
-public class SetAdminRole extends Command{
-
+public class SetAdminRole /*extends Command*/{
+/*
     public SetAdminRole(){
         super.name = "setadminrole";
         super.desc = "set a role to have administrative permissions";
@@ -15,4 +15,5 @@ public class SetAdminRole extends Command{
     public void run(SlashCommandInteractionEvent event) {
 
     }
+*/
 }

@@ -1,6 +1,8 @@
 package discordBot;
 
 import discordBot.commands.Command;
+import discordBot.commands.TeamRole;
+import discordBot.utils.SelectEmbed;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
@@ -52,11 +54,21 @@ public class CommandHandler extends ListenerAdapter {
     //componentId format: "<class> <function>"
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event){
-
+        String[] s = event.getComponentId().split(" ");
+        Command c = commandMap.get(s[0]);
+        String func = s[1];
+        switch (func) {
+            case "start" -> ((TeamRole) c).first(event);
+            case "next" -> ((TeamRole) c).next(event);
+            case "previous" -> ((TeamRole) c).previous(event);
+            case "end" -> ((TeamRole) c).last(event);
+        }
     }
 
     @Override
     public void onStringSelectInteraction(StringSelectInteractionEvent event){
-
+        if(event.getComponentId().equals("teamrole")){
+            ((TeamRole) commandMap.get("teamrole")).setRole(event);
+        }
     }
 }
