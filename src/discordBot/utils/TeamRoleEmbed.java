@@ -26,12 +26,12 @@ public class TeamRoleEmbed implements SelectEmbed{
     public TeamRoleEmbed(){
         teams = new ArrayList<>();
         String[] teamsarray = {
-                "Adult Swim", "Hellish Akuma", "Team Name", "HIGH PRIORITY", "≡GrenzLinge≡", "Ink Floyd", "69Süppchen!",
-                "INKfinity", "69Suppe!", "INKlusive!-LK.AG", "88☆ミ", "Inku no mi", "Abyss Ink", "Insecure Connection",
+                "Adult Swim", "Hellish Akuma", "Team Name", "HIGH PRIORITY", "\u2261GrenzLinge\u2261", "Ink Floyd", "69S\u00FCppchen!",
+                "INKfinity", "69Suppe!", "INKlusive!-LK.AG", "88\u2606\u30DF", "Inku no mi", "Abyss Ink", "Insecure Connection",
                 "Amatsu Legacy", "Jellyfish Jam", "Anenemies", "Kiwi Ice Cream", "Angelink", "Krill-ical Error",
                 "ASC Niji O", "Low Quality", "Axolotl Anarchy!!", "Malibu Rising", "Bewitchers", "Mohnsaft Bande",
                 "Big Bagel", "Off-Meta Squids", "Bish n' Chips", "Painted Knights", "Black Aurora", "PANDORA",
-                "Black Squid Band", "Pearlescence", "Blaeksprutter", "Physalia", "Blåhaj Blast!!", "Red Dawn",
+                "Black Squid Band", "Pearlescence", "Blaeksprutter", "Physalia", "Bl\u00E5haj Blast!!", "Red Dawn",
                 "BlahajSlider", "Reignfall", "BLITZ WAVE", "Remedy", "C.R.A.B.", "Riptide", "Calamariachis",
                 "RRRemix!!!", "Camp Flyfish", "SC Cyclones", "Camp Juice", "Shark Bait", "Card Sharks", "Shark Bytes",
                 "Checkmate", "Shell-Outs", "Coral Mist", "Shipwreck'd", "Cosmic Slushie", "Silly Seaside Sharks!",
@@ -41,7 +41,7 @@ public class TeamRoleEmbed implements SelectEmbed{
                 "Dubble Bubble", "STar X", "Einherjer Crew", "Starboard!", "Elegant Emerald", "Stardust Inksaders",
                 "Eternal Eclipsa", "Tentacoolios", "Euphoric Vibe", "Tentashrimps", "Feel Good Ink",
                 "The Breakfast Club", "Fried Calamari", "THULIUM", "Harmonic Convergence", "To Be Determined",
-                "Hazard Level Minimum", "Valence", "Hell Dualies", "Wishiwashi", "Hoothoot Recruits", "autacle"
+                "Hazard Level Minimum", "Valence", "Hell Dualies", "Wishiwashi", "Hoothoot Recruits", "\uD835\uDF0Fautacle"
         };
         teams.addAll(List.of(teamsarray));
         teams.sort(null);
@@ -95,12 +95,13 @@ public class TeamRoleEmbed implements SelectEmbed{
         Guild guild = event.getGuild();
         Optional<Role> role = guild.getRoles().stream().filter(r -> r.getName().equals(teamName)).findFirst();
         if(role.isEmpty()){
-            role = Optional.of(guild.createRole().setName(teamName).complete());
+            guild.createRole().setName(teamName).complete();
+            role = guild.getRoles().stream().filter(r -> r.getName().equals(teamName)).findFirst();
         }
-        AtomicReference<String> message = new AtomicReference<>("Set role ");
+        AtomicReference<String> message = new AtomicReference<>("Set role " + teams.get(teamnr));
         Optional<Role> existingrole = event.getMember().getRoles().stream().filter(r -> teams.contains(r.getName())).findFirst();
         existingrole.ifPresent(r -> {
-            guild.removeRoleFromMember(event.getUser(), r).queue();
+            guild.removeRoleFromMember(event.getMember(), r).queue();
             message.set("Removed " + r.getName() + " and added " + teams.get(teamnr));
         });
 
